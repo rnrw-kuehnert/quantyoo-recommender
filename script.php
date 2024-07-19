@@ -2,7 +2,7 @@
 // Define the parameters
 $partnerkey = 'radio-koeln';
 $platformkey = 'web-radiokoeln-de';
-$url = 'https://www.radiokoeln.de/artikel/fall-valeriia-tatverdaechtiger-nach-deutschland-ueberstellt-2039195.html'
+$url = 'https://www.radiokoeln.de/artikel/fall-valeriia-tatverdaechtiger-nach-deutschland-ueberstellt-2039195.html';
 $api_key = 'qy_radio_koeln-e54d4431-5dab-474e-b71a-0db1fcb9e659';
 
 // Initialize cURL session
