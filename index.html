@@ -1,37 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QY Recommendation</title>
+  </head>
+  <body>
+    <main>
+	<div class="container"></div>
+    </main>
+  </body>
+</html>
 <script>
-const partnerkey = 'radio-koeln';
-const platformkey = 'web-radiokoeln-de';
-const endpointUrl = `https://recommender.quantyoo.io/recos/url?partnerkey=${partnerkey}&platformkey=${platformkey}`;
-async function triggerEndpoint() {
-    try {
-        // Make the request to the endpoint
-        const response = await fetch(endpointUrl, {
-            method: 'GET', // or 'POST', 'PUT', etc. depending on your needs
-            headers: {
-                'Content-Type': 'application/json',
-                // Add any other headers you need here
-            },
-        });
+const partnerKey = 'radio-koeln';
+const platformKey = 'web-radiokoeln-de';
+const baseUrl = `https://recommender.quantyoo.io/recos/url/${partnerKey}/${platformKey}/?url=`;
+const articleUrl = 'https://www.radiokoeln.de/artikel/british-open-start-debakel-fuer-golf-stars-woods-und-mcilroy-2048041.html';
+const url = `${baseUrl}${encodeURIComponent(articleUrl)}`;
+let containerElement = document.querySelector('.container');
+console.log(url);
 
-        // Check if the response is OK (status code 200-299)
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+const options = {
+  method: 'GET',
+  headers: {
+    'accept': 'application/json',
+    'X-API-Key': 'qy_radio_koeln-e54d4431-5dab-474e-b71a-0db1fcb9e659'
+  }
+};
 
-        // Parse the response as JSON
-        const data = await response.json();
+fetch(url, options)
+  .then(response => response.json())
+  .then(data => containerElement.append(JSON.stringify(data.response.urls, null, 4)))
+  //.then(data => containerElement.append(data.response.urls["_source"]))
+  //.then(data => containerElement.append(data.response))
+  //.then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 
-        // Log the JSON data to the console
-        console.log(data);
-
-        // You can also handle the data here as needed
-        // For example, update the UI or process the data further
-    } catch (error) {
-        // Handle any errors that occurred during the fetch
-        console.error('Error fetching data:', error);
-    }
-}
-
-// Call the function to trigger the endpoint
-triggerEndpoint();
 </script>
